@@ -1,6 +1,6 @@
 namespace WordFinder.Tests;
 
-public class UnitTest1
+public class WordFinderTests
 {
     [Fact]
     public void Test1()
