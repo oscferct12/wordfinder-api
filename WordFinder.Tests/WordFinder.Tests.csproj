@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WordFinderAPI\WordFinderAPI.csproj" />
+  </ItemGroup>
+
 </Project>

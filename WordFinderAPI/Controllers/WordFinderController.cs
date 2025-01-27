@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WordFinderAPI.Models;
 using WordFinderAPI.Services;
 
 namespace WordFinderAPI.Controllers
@@ -7,19 +8,20 @@ namespace WordFinderAPI.Controllers
     [Route("api/[controller]")]
     public class WordFinderController : ControllerBase
     {
+
+        private readonly IWordFinderService _wordFinderService;
+
+        public WordFinderController(IWordFinderService wordFinderService)
+        {
+            _wordFinderService = wordFinderService;
+        }
+
         [HttpPost("find")]
         public IActionResult FindWords([FromBody] WordFinderRequest request)
         {
-            var wordFinder = new WordFinder(request.Matrix);
-            var result = wordFinder.Find(request.WordStream);
+            var result = _wordFinderService.Find(request.Matrix);
 
-            return Ok(result.Take(10)); // Top 10 most repeated
+            return Ok(result);
         }
-    }
-
-    public class WordFinderRequest
-    {
-        public IEnumerable<string> Matrix { get; set; }
-        public IEnumerable<string> WordStream { get; set; }
     }
 }
